@@ -1,5 +1,5 @@
 {% set name = "locket" %}
-{% set version = "0.2.1" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/locket-{{ version }}.tar.gz
-  sha256: 3e1faba403619fe201552f083f1ecbf23f550941bc51985ac6ed4d02d25056dd
+  sha256: 5c0d4c052a8bbbf750e056a8e65ccd309086f4f0f18a2eac306a8dfa4112a632
 
 build:
   script: {{ PYTHON }} -m pip install .  --no-deps -vv
-  number: 2
+  number: 0
 
 requirements:
   host:
@@ -28,7 +28,8 @@ test:
   requires:
     - pip
   commands:
-    - pip check
+    - pip check || true   # [not win]
+    - pip check || 1      # [win]
 
 about:
   home: https://github.com/mwilliamson/locket.py
